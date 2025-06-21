@@ -1,5 +1,6 @@
 {
   "name": "youtube_clone_app",
+  "homepage": "https://Yashd2602.github.io/YouTube-Clone-App/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,9 +8,12 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh=pages -d dist"
   },
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "moment": "^2.30.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
