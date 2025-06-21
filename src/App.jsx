@@ -22,7 +22,7 @@ function App() {
       path:'/video/:categoryId/:videoId',
       element:<Videos searchQuery={searchQuery} setSearchQuery={setSearchQuery} data={data} searchState={searchState}/>
     },
-  ])
+  ],{basename: import.meta.env.DEV ? '/' : '/YouTube-Clone-App'})
   return (
     <>
     <RouterProvider router={router}/>
