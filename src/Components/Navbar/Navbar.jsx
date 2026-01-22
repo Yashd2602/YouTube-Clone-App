@@ -19,6 +19,7 @@ function Navbar({setSidebar,searchQuery,setSearchQuery,data,setData,setSearchSta
         <img className='menu-icon' src={menu} alt="menu"  onClick={()=>setSidebar(prev=>prev===false?true:false)}/>
         <Link to="/"><img className='logo' src={logo} alt="logo" onClick={()=>setSearchState(false)}/></Link>
         <h1 className='title'>YouTube</h1>
+        <img className='user-icon' src={usericon} alt="profile picture" />
       </div>
       <div className='nav-middle flex-div'>
         <div className="search-box flex-div">
@@ -39,7 +40,6 @@ function Navbar({setSidebar,searchQuery,setSearchQuery,data,setData,setSearchSta
         <img src={upload} alt="upload" />
         <img src={more} alt="more" />
         <img src={notification} alt="notifications" />
-        <img className='user-icon' src={usericon} alt="profile picture" />
       </div>
     </nav>
   )
