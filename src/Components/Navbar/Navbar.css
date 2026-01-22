@@ -15,7 +15,7 @@ nav {
   width: 60px;
 }
 .title {
-  width: 100px;
+  width: auto;
 }
 .nav-middle .search-box {
   border: 1px solid #ccc;
@@ -42,6 +42,12 @@ nav {
 }
 .nav-left .user-icon {
   margin-left: auto;
+  margin-right: 0;
+}
+.nav-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 @media (max-width: 900px) {
   .menu-icon {

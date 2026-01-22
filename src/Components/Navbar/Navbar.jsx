@@ -13,6 +13,24 @@ import { APIKEY } from '../../data'
 function Navbar({setSidebar,searchQuery,setSearchQuery,data,setData,setSearchState}) {
   console.log(data);
   
+  const handleSearch = async () => {
+    const searchDetails_url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${searchQuery}&key=${APIKEY}`
+    const result = await fetch(searchDetails_url).then(response=>response.json())
+    const videoIds = result.items.map(item => item.id.videoId).filter(id => id); // remove undefined
+
+    const videosUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoIds.join(",")}&key=${APIKEY}`;
+    const videosRes = await fetch(videosUrl);
+    const finalResult = await videosRes.json();
+    setSearchState(true);
+    setData(finalResult.items);
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  }
+
   return (
     <nav className='flex-div'>
       <div className='nav-left flex-div '>
@@ -23,17 +41,8 @@ function Navbar({setSidebar,searchQuery,setSearchQuery,data,setData,setSearchSta
       </div>
       <div className='nav-middle flex-div'>
         <div className="search-box flex-div">
-        <input type="text" placeholder='Search' onChange={(e)=>setSearchQuery(e.target.value)}/>
-        <Link to="/youtube"><img src={search} alt="search" onClick={async()=>{
-          const searchDetails_url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${searchQuery}&key=${APIKEY}`
-           const result = await fetch(searchDetails_url).then(response=>response.json())
-              const videoIds = result.items.map(item => item.id.videoId).filter(id => id); // remove undefined
-
-  const videosUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoIds.join(",")}&key=${APIKEY}`;
-  const videosRes = await fetch(videosUrl);
-  const finalResult = await videosRes.json();
-  setSearchState(true);
-  setData(finalResult.items)}}/></Link>
+        <input type="text" placeholder='Search' onChange={(e)=>setSearchQuery(e.target.value)} onKeyPress={handleKeyPress}/>
+        <Link to="/youtube"><img src={search} alt="search" onClick={handleSearch}/></Link>
         </div>
       </div>
       <div className='nav-right flex-div'>
